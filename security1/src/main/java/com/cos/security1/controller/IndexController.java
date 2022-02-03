@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,7 @@ public class IndexController {
 	@GetMapping("/test/login")
 	public @ResponseBody String testLogin(
 			Authentication authentication,
-			@AuthenticationPrincipal UserDetails userDetails) { //Di(의존성 주입)
+			@AuthenticationPrincipal PrincipalDetails userDetails) { //Di(의존성 주입)
 		System.out.println("/test/login==================");
 		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
 		System.out.println("authentication:"+principalDetails.getUser());
@@ -37,6 +38,19 @@ public class IndexController {
 		System.out.println(userDetails.getUsername());
 		return "세션정보확인하기";
 	}
+	
+	@GetMapping("/test/oauth/login")
+	public @ResponseBody String testOAuthLogin(
+			Authentication authentication,
+			@AuthenticationPrincipal OAuth2User oauth) { //Di(의존성 주입)
+		System.out.println("/test/login==================");
+		OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+		System.out.println("authentication:"+oauth2User.getAttributes());
+		System.out.println("authentication:"+oauth2User.getAttributes());
+		return "OAuth세션정보확인하기";
+	}
+
+	
 	@GetMapping({"","/"})
 	public String index() {
 		//머스테치 기본폴더 src/main/resources/

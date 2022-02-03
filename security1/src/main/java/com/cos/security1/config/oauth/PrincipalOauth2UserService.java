@@ -1,5 +1,7 @@
 package com.cos.security1.config.oauth;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -9,6 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	//구글로 부터 받은 userRequest데이터에 대한후처리되는 함수
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
