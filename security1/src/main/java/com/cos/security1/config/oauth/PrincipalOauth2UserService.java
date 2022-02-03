@@ -23,8 +23,19 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 		//userRequest정보 -> 회원프롵필 받아야함(loadUser함수) -> 회원프로필
 		System.out.println("getAttribute : "+super.loadUser(userRequest).getAuthorities());
 		
+		
+		
 		OAuth2User oauth2User = super.loadUser(userRequest);
 				//회원가입을 강제로 진행해볼 예정
 		return super.loadUser(userRequest);
-	}
-}
+	
+	//회원가입을 강제로 진행해볼 예정
+		//	if(userRequest.getClientRegistration().getRegistrationId().equals("google")){
+		//		System.out.println("구글 로그인 요청");
+		//		oAuth2UserInfo=new GoogleUserInfo(oauth2User.getAttributes());
+		//	}else if(userRequest.getClientRegistration().getRegistrationId().equals("facebook")) {
+		//		
+		//	}else {
+		//		System.out.println("우리는 구글과 페이스북만 지원해요");
+		//	}
+}}

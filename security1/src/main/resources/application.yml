@@ -32,5 +32,9 @@ spring:
             - email
             - profile
             
-        
-        
+  facebook:
+    client-id:
+    client-secret:
+    scope:
+    - email
+    - profile
