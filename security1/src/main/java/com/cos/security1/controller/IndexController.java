@@ -105,10 +105,6 @@ public class IndexController {
 	public @ResponseBody String info() {
 		return "개인정보";
 	}
-	/*
-	 * @GetMapping("joinProc") public @ResponseBody String joinProc() { return
-	 * "회원가입완료"; }
-	 */
 	
 	@PreAuthorize("hasRole('ROLE_MANAGER')or hasRole('ROLE_ADMIN')")
 	@GetMapping("/data")
