@@ -24,7 +24,7 @@ import lombok.Data;
 public class PrincipalDetails implements UserDetails, OAuth2User{
 	
 	private User user; //콤포지션
-	public Map<String, Object> getAttributes() {
+	public Map<String, Object> attributes() {
 		return attributes;
 	}
 
@@ -112,6 +112,11 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	@Override
+	public Map<String, Object> getAttributes(){
+		return attributes;
 	}
 
 	@Override

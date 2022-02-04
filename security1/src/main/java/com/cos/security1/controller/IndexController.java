@@ -59,10 +59,16 @@ public class IndexController {
 		return "index"; 
 	}
 		
+	//@GetMapping("/user")
+	//	public @ResponseBody String user(@AuthenticationPrincipal OAuth2User oauth) {
+	//		return  "user";
+	//}
+	
 	@GetMapping("/user")
-		public @ResponseBody String user(@AuthenticationPrincipal OAuth2User oauth) {
-			return  "user";
-	}
+	public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+		System.out.println("principalDetails:"+principalDetails.getUser());
+		return  "user";
+}
 	
 	@GetMapping("/admin")
 	public String admin() {
