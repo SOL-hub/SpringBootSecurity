@@ -89,7 +89,7 @@ public class IndexController {
 	}
 	
 	
-	@PostMapping("join")
+	@PostMapping("/join")
 	public String join(User user) {
 		System.out.println(user);
 		user.setRole("ROLE_USER");
