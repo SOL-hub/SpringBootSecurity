@@ -13,6 +13,6 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	//select * from user where username=1?
 	public User findByUsername(String username); //JPA name함수
 	
-	public User findByEmail();
+	//public User findByEmail();
 	
 }
