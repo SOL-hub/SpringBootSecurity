@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import com.cos.security1.model.User;
 
@@ -20,7 +21,7 @@ import lombok.Data;
 //Security Session => authentication =>UserDetails
 
 
-public class PrincipalDetails implements UserDetails{
+public class PrincipalDetails implements UserDetails, OAuth2User{
 	
 	private User user; //콤포지션
 	public Map<String, Object> getAttributes() {
@@ -111,6 +112,12 @@ public class PrincipalDetails implements UserDetails{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
