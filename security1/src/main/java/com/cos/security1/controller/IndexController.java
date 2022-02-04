@@ -83,6 +83,12 @@ public class IndexController {
 		return "joinForm";
 	}
 	
+	@GetMapping("joinProc")
+	public @ResponseBody String joinProc() {
+		return "회원가입 완료됨";
+	}
+	
+	
 	@PostMapping("join")
 	public String join(User user) {
 		System.out.println(user);
