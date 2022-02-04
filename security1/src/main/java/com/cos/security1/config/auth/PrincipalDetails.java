@@ -19,10 +19,19 @@ import lombok.Data;
 
 //Security Session => authentication =>UserDetails
 
-@Data
+
 public class PrincipalDetails implements UserDetails{
 	
 	private User user; //콤포지션
+	public Map<String, Object> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(Map<String, Object> attributes) {
+		this.attributes = attributes;
+	}
+
+
 	private Map<String, Object> attributes; 
 	
 	//일반로그인
@@ -53,19 +62,16 @@ public class PrincipalDetails implements UserDetails{
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
 		return user.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
 		return user.getUsername();
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
