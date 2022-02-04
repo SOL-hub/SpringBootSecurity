@@ -17,7 +17,7 @@ public class PrincipalDetailsService implements UserDetailsService{
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Override
+	@Override							  //이거는 loginForm안에 있는 name="username"이다.
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		System.out.println("username:"+username);
 		User userEntity = userRepository.findByUsername(username);

@@ -9,23 +9,10 @@ import com.cos.security1.model.User;
 //@Repository라는 어노테이션이 없어도 Ioc된다. 이유는 JPaRepository가 상속했기 때문에
 public interface UserRepository extends JpaRepository<User, Integer>{
 	
-	public User findByUsername(String username);
+	//findBy규칙 -> ㅕㄴㄷ구믇ansqjq
+	//select * from user where username=1?
+	public User findByUsername(String username); //JPA name함수
 	
-	//회원가입을 강제로 진행해볼 에정
-	//String provider = userRequest.getClientRegistration().getClientId(); //google
-	//String providerId = oauth2User.getAttribute("sub");
-	//String username = provider+"-"+providerId; 
-	//String password = BCryptPasswordEncoder.encode("겟인데어");
-	//String email = oauth2User.getAttribute("email");
-	//String role = "ROLE_USER";
+	public User findByEmail();
 	
-//	User userEntity = userRepository.findByUsername(username);
-//	
-//	if(userEntity == null) {
-//		
-//	}else {
-		
-//	}
-	
-//	return super.loadUser(userRequest);
 }
