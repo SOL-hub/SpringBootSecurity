@@ -45,6 +45,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 		User userEntity = userRepository.findByUsername(username);
 		
 		if(userEntity ==null ) {
+			System.out.println("구글 로그인이 최초입니다");
 			userEntity = /*(User.builder())
 					.username(username)
 					.password(password)
@@ -54,19 +55,10 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 					.providerId(providerId)
 					.build();*/
 			userRepository.save(userEntity);
+		}else {
+			System.out.println("구글 로그인을 이미 한 적이 있습니다. 당신은 자동회원가입이 되어 있습니다.");
 		}
-			
-		//회원가입을 강제로 진행해볼 예정
-		//return super.loadUser(userRequest);
 	
-		return new PrincipalDetails(userEntity, oauth2User.getAttributes());
-	//회원가입을 강제로 진행해볼 예정
-		//	if(userRequest.getClientRegistration().getRegistrationId().equals("google")){
-		//		System.out.println("구글 로그인 요청");
-		//		oAuth2UserInfo=new GoogleUserInfo(oauth2User.getAttributes());
-		//	}else if(userRequest.getClientRegistration().getRegistrationId().equals("facebook")) {
-		//		
-		//	}else {
-		//		System.out.println("우리는 구글과 페이스북만 지원해요");
-		//	}
+		return new PrincipalDetails(userEntity, oauth2User.getAttributes());//OAuth2User 리턴
+
 }}

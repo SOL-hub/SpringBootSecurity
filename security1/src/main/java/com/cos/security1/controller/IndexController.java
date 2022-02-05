@@ -64,6 +64,8 @@ public class IndexController {
 	//		return  "user";
 	//}
 	
+	//OAuth로그인해도 principalDetails해서 받을 수 있고
+	//일반 로그인을 해도 principalDetails
 	@GetMapping("/user")
 	public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
 		System.out.println("principalDetails:"+principalDetails.getUser());
