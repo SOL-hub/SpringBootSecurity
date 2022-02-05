@@ -9,6 +9,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import com.cos.security1.config.auth.PrincipalDetails;
+import com.cos.security1.config.oauth.provider.GoogleUserInfo;
+import com.cos.security1.config.oauth.provider.OAuth2UserInfo;
 import com.cos.security1.model.User;
 import com.cos.security1.repository.UserRepository;
 
@@ -34,9 +36,23 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 		//구글로그인 버튼 클릭 -> 구글 로그인창 -> 로그인을 완료 -> code를 리턴(OAuth-Client라이브러리)-> AccessToken요청
 		//userRequest정보 -> 회원프롵필 받아야함(loadUser함수) -> 회원프로필
 		System.out.println("getAttribute : "+oauth2User.getAttributes());
-			
-		String provider = userRequest.getClientRegistration().getRegistrationId();//구글
-		String providerId = oauth2User.getAttribute("sub"); //null값
+		
+		
+		//회원가입 강제로 진행해볼 예정
+		OAuth2UserInfo oAuth2UserInfo = null;
+		
+		if(userRequest.getClientRegistration().getRegistrationId().equals("google")) {
+			System.out.println("구글 로그인 요청");
+			oAuth2UserInfo = new GoogleUserInfo(oauth2User.getAttributes());
+		}else if(userRequest.getClientRegistration().getRegistrationId().equals("facebook")) {
+		
+		}else {
+			System.out.println("우린 구글, 페이스북만 지원합니다.");
+		}
+		
+		
+		String provider = oAuth2UserInfo.getProvider();
+		String providerId = oAuth2UserInfo.getProviderId();
 		String username = provider+"_"+providerId;
 		String password = bCryptPasswordEncoder.encode("겟인데어");
 		String email = oauth2User.getAttribute("email");
