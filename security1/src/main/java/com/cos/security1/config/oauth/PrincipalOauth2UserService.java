@@ -35,8 +35,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 		//userRequest정보 -> 회원프롵필 받아야함(loadUser함수) -> 회원프로필
 		System.out.println("getAttribute : "+oauth2User.getAttributes());
 			
-		String provider = userRequest.getClientRegistration().getClientId();//구글
-		String providerId = oauth2User.getAttribute("sub");
+		String provider = userRequest.getClientRegistration().getRegistrationId();//구글
+		String providerId = oauth2User.getAttribute("sub"); //null값
 		String username = provider+"_"+providerId;
 		String password = bCryptPasswordEncoder.encode("겟인데어");
 		String email = oauth2User.getAttribute("email");
