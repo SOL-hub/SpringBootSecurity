@@ -1,5 +1,6 @@
 package com.sol.security2.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -8,10 +9,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.sol.security2.auth.oauth.PrincipalOauth2UserService;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	@Autowired
+	private PrincipalOauth2UserService prinOauth2UserService;
+	
 	
 	@Bean
 	public BCryptPasswordEncoder encodePwd() {
@@ -33,6 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.defaultSuccessUrl("/")
 		.and()
 		.oauth2Login()
-		.loginPage("/loginForm");
+		.loginPage("/loginForm")
+		.userInfoEndpoint()
+		.userService(prinOauth2UserService);
 	}
 }
