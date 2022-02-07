@@ -51,7 +51,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 		}else if(userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
 			
 			System.out.println("네이버 로그인 요청");
-			oAuth2UserInfo = new NaverUserInfo(oauth2User.getAttributes());
+			oAuth2UserInfo = new NaverUserInfo((Map)oauth2User.getAttributes("response"));
 		}else {
 			System.out.println("우리는 구글과 페북만 지원");
 		}
