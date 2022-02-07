@@ -1,6 +1,8 @@
 package com.sol.security2.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,5 +64,19 @@ public class IndexController {
 		userRepository.save(user); 
 		return "redireact:/loginForm";
 	}
+	
+	@Secured("ROLE_ADMIN")
+	@GetMapping("info")
+	public @ResponseBody String info() {
+		return "개인정보";
+	}
+	
+	//여러개를 하려할 경우 hasRole넣어서 작성
+	@PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")//데이터가 실행되기 직전에 실행된다.
+	@GetMapping("data")
+	public @ResponseBody String data() {
+		return "데이터정보";
+	}
+	
 	
 }
