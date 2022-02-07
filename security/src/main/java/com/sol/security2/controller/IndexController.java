@@ -3,12 +3,14 @@ package com.sol.security2.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sol.security2.auth.PrincipalDetails;
 import com.sol.security2.model.User;
 import com.sol.security2.repository.UserRepository;
 
@@ -21,6 +23,16 @@ public class IndexController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bCrpBCryptPasswordEncoder;
+	
+	
+
+	@GetMapping("/test/login")
+	public @ResponseBody String testLogin(Authentication authentication) {
+		System.out.println("/test/login=========");
+		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+		System.out.println("authentication:"+principalDetails);
+		return "세션 정보 확인하기";
+	}
 	
 	@GetMapping({"","/"})
 	public String index() {

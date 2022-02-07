@@ -8,10 +8,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.sol.security2.model.User;
 
+import lombok.Data;
+
+@Data
 public class PrincipalDetails implements UserDetails{
 	
 	private User user;
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public PrincipalDetails(User user) {
 		this.user=user;
 	}

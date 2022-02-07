@@ -15,6 +15,9 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 		System.out.println("getAccessToken:"+userRequest.getAccessToken().getTokenValue());
 		System.out.println("getAttributes:"+super.loadUser(userRequest).getAttributes());
 		//받은 getAttributes 정보로 강제 회원가입을 시킬 것이다.
+		
+		OAuth2User oauth2User = super.loadUser(userRequest); 
+		
 		return super.loadUser(userRequest);
 	}
 }
