@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import com.sole.jwt.config.jwt.JwtAuthenticationFilter;
 import com.sole.jwt.filter.MyFilter1;
 
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //		.addFilter(corsFilter)
 		.formLogin().disable()
 		.httpBasic().disable()
+		.addFilter(new JwtAuthenticationFilter())
 		.authorizeRequests()
 		.antMatchers("/api/v1/user/**")
 		.access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
