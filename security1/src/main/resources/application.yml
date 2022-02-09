@@ -41,8 +41,8 @@ spring:
     
     
     naver:
-     client-id:5fdPgZKsbRa_rJKsOSg0
-     client-secret:5fdPgZKsbRa_rJKsOSg0
+     client-id:htghxb0Uip50vz6twKLC
+     client-secret:MJRTzZ2D5D
      scope:
      -name
      -email
