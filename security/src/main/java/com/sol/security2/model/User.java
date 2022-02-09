@@ -9,10 +9,13 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class User {
 	@Id//primary key
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -29,6 +32,22 @@ public class User {
 	//private Timestamp loginDate;
 	@CreationTimestamp
 	private Timestamp createDate;
+	
+	
+	@Builder
+	public User(String username, String password, String email, String role, String provider, String providerId,
+			Timestamp createDate) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.role = role;
+		this.provider = provider;
+		this.providerId = providerId;
+		this.createDate = createDate;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -76,6 +95,11 @@ public class User {
 	}
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
+	}
+
+	public static Object builder() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

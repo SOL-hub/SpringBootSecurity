@@ -26,8 +26,6 @@ public class IndexController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bCrpBCryptPasswordEncoder;
-	
-	
 
 	@GetMapping("/test/login")
 	public @ResponseBody String testLogin(Authentication authentication,
@@ -58,8 +56,11 @@ public class IndexController {
 		return "index"; 
 	}
 	
+	//OAuth으로 로그인을 해도 principalDetail
+	//일반 로그인을 해도 principalDetail
 	@GetMapping("/user")
-	public @ResponseBody String user() {
+	public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+		System.out.println("pricipalDetails"+principalDetails.getUser());
 		return "user";
 	}
 	
