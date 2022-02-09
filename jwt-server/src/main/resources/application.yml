@@ -11,9 +11,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/security?serverTimezone=Asia/Seoul
-    username: sol
-    password: sol1234
+    url: jdbc:mysql://localhost:3306/securityJwt?serverTimezone=Asia/Seoul
+    username: sol-jwt
+    password: sol-jwt1234
 
   jpa:
     hibernate:
