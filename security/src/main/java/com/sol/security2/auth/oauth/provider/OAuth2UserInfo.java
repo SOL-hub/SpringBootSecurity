@@ -1,4 +1,4 @@
-package com.cos.security1.config.auth.provider;
+package com.sol.security2.auth.oauth.provider;
 
 public interface OAuth2UserInfo {
 	
