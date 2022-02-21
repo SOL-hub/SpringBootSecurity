@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -28,23 +29,23 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
-	@Autowired
-	UserDetailsService userDetailsService;
-
-	protected void configure(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication().withUser("user").password("{noop}1111").roles("USER");
+		auth.inMemoryAuthentication().withUser("sys").password("{noop}1111").roles("SYS", "USER");
+		auth.inMemoryAuthentication().withUser("admin").password("{noop}1111").roles("ADMIN", "SYS", "USER");
+		
+	}
+	
+	protected void configure(HttpSecurity http) throws Exception{
 		http
-		.authorizeRequests()
+		.authorizeHttpRequests()
+		.antMatchers("/user").hasRole("USER")
+		.antMatchers("/admin/pay").hasRole("ADMIN")
+		//.antMatchers("/admin/**").access("hasRole('ADMIN')or hasRole('SYS')")
 		.anyRequest().authenticated();
 		
 		http
 		.formLogin();
-		
-		http
-		.sessionManagement()
-		//.sessionFixation().none(); //인증없이 가능 
-		.sessionFixation().changeSessionId(); //따라서 기본값으로 설정해줘야한다.
-	
-		
+		}
 	}
-	
-}
