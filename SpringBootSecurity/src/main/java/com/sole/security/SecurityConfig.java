@@ -40,9 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.formLogin();
 		
 		http
-			.sessionManagement()
-			.maximumSessions(1)
-			.maxSessionsPreventsLogin(true); //세션으 초과됐을 때 로그인을 아예 못하게하는 전략
+		.sessionManagement()
+		//.sessionFixation().none(); //인증없이 가능 
+		.sessionFixation().changeSessionId(); //따라서 기본값으로 설정해줘야한다.
 	
 		
 	}
