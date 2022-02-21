@@ -40,31 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.formLogin();
 		
 		http
-		.logout()
-		.logoutUrl("/logout")
-		.logoutSuccessUrl("/login")
-		.addLogoutHandler(new LogoutHandler() {
-			
-			@Override
-			public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-				HttpSession session = request.getSession();
-				session.invalidate();
-			}
-		})
-		.logoutSuccessHandler(new LogoutSuccessHandler() {
-			
-			@Override
-			public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-					throws IOException, ServletException {
-				response.sendRedirect("/login");
-				
-			}
-		})
-		.and()
-		.rememberMe()
-		.rememberMeParameter("remeber")
-		.tokenValiditySeconds(3600)
-		.userDetailsService(userDetailsService);
+			.sessionManagement()
+			.maximumSessions(1)
+			.maxSessionsPreventsLogin(true); //세션으 초과됐을 때 로그인을 아예 못하게하는 전략
+	
 		
 	}
 	
