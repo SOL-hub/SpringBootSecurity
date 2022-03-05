@@ -1,23 +1,48 @@
-<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
- <title>zaritalk</title>
+<head th:replace="fragments/header :: header" />
+<style>
+</style>
 
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-<div class="container">
-<!-- <div th:replace="fragments/bodyHeader :: bodyHeader" />-->
- <div class="jumbotron">
- <h1>자리톡 커뮤니티 목록</h1>
- <p class="lead">회원 기능</p>
- <p>
- <a class="btn btn-lg btn-secondary" href="/members/new">회원 가입</a>
- <a class="btn btn-lg btn-secondary" href="/members">회원 목록</a>
-  <a class="btn btn-lg btn-secondary" href="/members">글쓰기</a>
- </p>
+<h2> 회원가입</h2>
 
- </div>
-<!-- <div th:replace="fragments/footer :: footer" />-->
+<form role="form" action="/join" th:object="${userForm}"method="post">
 
-</div> <!-- /container -->
+ <div class="container">
+      <div class="tbl_wrp">
+          <div class="form-group">
+            <label for="username" class="col-sm-2 control-label">아이디</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control input-large" name="username" id="username" placeholder="username" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="col-sm-2 control-label">비밀번호</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control input-large" name="password" id="password" placeholder="Password" data-minlength="6" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">이메일</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control input-large" name="email" id="email" placeholder="이메일" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="age" class="col-sm-2 control-label">나이</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control input-large" name="age" id="age" placeholder="나이" required>
+            </div>
+          </div>
+          <br/>
+          <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-10">
+              <button type="Submit" class="btn btn-dark btn-lg">가입하기</button>
+            </div>
+          </div>
+          
+           <a class="btn btn-lg btn-secondary" href="/">홈페이지로 가기</a>
+           <a class="btn btn-lg btn-secondary" href="/list">회원 목록 보기</a>
+        </form>
+      </div>
+    </div>
