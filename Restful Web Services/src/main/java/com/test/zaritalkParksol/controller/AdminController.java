@@ -33,8 +33,17 @@ public class AdminController {
 	
 	//사용자 전체 목록 조회
 	@GetMapping("/users")
-	public List<User> findAll(){
-		return userService.findAll();
+	public MappingJacksonValue findAll(){
+		List<User> users = userService.findAll();
+		
+		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id", "nickname", "quit", "joinDate");
+		
+		FilterProvider filters = new SimpleFilterProvider().addFilter("UserInfo", filter);
+		
+		MappingJacksonValue mapping = new MappingJacksonValue(users);
+		mapping.setFilters(filters);
+		
+		return mapping;
 	}
 	
 	//상세조회를 하고 싶은 사용자 값
