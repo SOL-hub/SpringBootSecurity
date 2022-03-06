@@ -1,8 +1,12 @@
 package com.example.demo4.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,13 +28,37 @@ public class UserController {
 		this.userService = userService;
 	}
 	
+	//회원등록
+	@GetMapping(value = "/join")
+	public String join() {
+		return "join";
+	}
+	
+	@PostMapping("/join")
+	public String joinFinish(User user) {
+		User joinUser = new User();
+		joinUser.setUsername(joinUser.getUsername());
+		
+		System.out.println("user=" + user.getUsername());
+		
+		userService.join(joinUser);
+		
+		return "redirect:/";
+	}
+	
+	//목록조회
+	@GetMapping(value = "/list")
+		public String list(Model model) {
+		List<User> users = userService.findUsers();
+		model.addAttribute("users", users);
+		
+		return "/list";
+		}
+		
 	@GetMapping(value = "/write")
 	public String write() throws Exception{
 		return "write";
 	}
 	
-	@GetMapping(value = "/join")
-	public String join() {
-		return "join";
-	}
+
 }

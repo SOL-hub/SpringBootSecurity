@@ -14,10 +14,10 @@ public class HomeController {
 	}
 	
 	//목록조회
-	@GetMapping(value = "/list")
-	public String list() {
-		return "/list";
-	}
+	//@GetMapping(value = "/list")
+	//public String list() {
+	//	return "/list";
+	//}
 	
 	/*
 	 * //회원가입
