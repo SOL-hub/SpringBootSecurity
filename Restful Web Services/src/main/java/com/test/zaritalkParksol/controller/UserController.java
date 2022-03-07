@@ -3,6 +3,8 @@ package com.test.zaritalkParksol.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +41,13 @@ public class UserController {
 		if(user == null) {
 			throw new UserNotFoundException(String.format("ID[%s] not found", id));
 		}
+		
+		//HATEOAS
+		//Resource<User> resource = new Resource<>(user);
+		//ControllerLinkBuilder linkTo = LinkTo(methodOn(this.getClass()).findAll());
+
+		//resource.add(linkTo.withRel("all-users"));
+
 		return user;
 	}
 	

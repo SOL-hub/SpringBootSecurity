@@ -3,6 +3,7 @@ package com.test.zaritalkParksol.controller;
 import java.net.URI;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.test.zaritalkParksol.domin.Use2;
 import com.test.zaritalkParksol.domin.User;
 import com.test.zaritalkParksol.service.UserService;
 
@@ -47,7 +49,7 @@ public class AdminController {
 	}
 	
 	//상세조회를 하고 싶은 사용자 값
-	@GetMapping("/users/{id}")
+	@GetMapping("v1/users/{id}")
 	public User findOne(@PathVariable String id) {
 		User user = userService.findOne(id);
 		
@@ -65,6 +67,29 @@ public class AdminController {
 		return user;
 	}
 	
-
+	/*
+	 * @GetMapping("v2/users/{id}") //@GetMapping(value =
+	 * ""/users/{id}", headers ="X-API-VERSION=1") public User
+	 * findOne2(@PathVariable String id) { User user = userService.findOne(id);
+	 * 
+	 * if(user == null) { throw new
+	 * UserNotFoundException(String.format("ID[%s] not found", id)); }
+	 * 
+	 * Use2 userV2 = new Use2(); BeanUtils.copyProperties(user, userV2);
+	 * userV2.setAuth("VIP");
+	 * 
+	 * SimpleBeanPropertyFilter filter =
+	 * SimpleBeanPropertyFilter.filterOutAllExcept("id", "nickname", "quit",
+	 * "joinDate");
+	 * 
+	 * FilterProvider filters = new SimpleFilterProvider().addFilter("UserInfo",
+	 * filter);
+	 * 
+	 * MappingJacksonValue mapping = new MappingJacksonValue(userV2);
+	 * mapping.setFilters(filters);
+	 * 
+	 * return user; }
+	 */
 	
+
 }
